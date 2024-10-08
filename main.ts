@@ -26,11 +26,13 @@ const bookSchema = new mongoose.Schema({
 //Instanciação
 export const BookModel = mongoose.model('Book', bookSchema)
 
+app.use(express.json())
+
 //Criando rotas
 
 //GET ALL - Retorna todos os livros salvos
-app.get('/', (req: Request, res: Response) => {
-    const books = BookModel.find()
+app.get('/', async (req: Request, res: Response) => {
+    const books = await BookModel.find()
     res.send({books})
 })
 
